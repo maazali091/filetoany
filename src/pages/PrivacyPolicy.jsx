@@ -11,7 +11,11 @@ function PrivacyPolicy() {
         <div className="prose prose-slate dark:prose-invert max-w-none space-y-6 text-slate-700 dark:text-slate-300">
           <section>
             <h2 className="text-2xl font-bold mb-3">1. Introduction</h2>
-            <p>Convertly ("we", "our", "us") respects your privacy. This Privacy Policy explains how we collect, use, and protect your information when you use our file conversion services at Convertly.</p>
+            <p><span className="font-extrabold tracking-tight text-slate-900 dark:text-white">
+                                file<span className="text-indigo-600">to</span>any
+                              </span> ("we", "our", "us") respects your privacy. This Privacy Policy explains how we collect, use, and protect your information when you use our file conversion services at <span className="font-extrabold tracking-tight text-slate-900 dark:text-white">
+                                file<span className="text-indigo-600">to</span>any
+                              </span>.</p>
           </section>
 
           <section>

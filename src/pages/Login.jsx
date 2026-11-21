@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 
 function Login() {
@@ -76,7 +76,9 @@ function Login() {
               Welcome back
             </h1>
             <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
-              Sign in to your Convertly account.
+              Sign in to your <span className="font-extrabold tracking-tight text-slate-900 dark:text-white">
+                                file<span className="text-indigo-600">to</span>any
+                              </span> account.
             </p>
           </div>
 
@@ -111,6 +113,16 @@ function Login() {
                 autoComplete="current-password"
                 className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
               />
+            </div>
+
+
+            <div className="flex justify-end mt-2">
+              <Link 
+                to="/forgot-password" 
+                className="text-sm text-indigo-600 dark:text-indigo-400 hover:underline"
+              >
+                Forgot password?
+              </Link>
             </div>
 
             {error && (

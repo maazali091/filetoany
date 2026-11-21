@@ -1,55 +1,46 @@
-import React from 'react'
-import {} from "lucide-react"
-import { FaGoogle, FaMicrosoft, FaSlack, FaSpotify, FaStripe } from 'react-icons/fa'
-import 'swiper/css';
-import 'swiper/css/pagination';
-import { Autoplay, Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react'
+import React from 'react';
 
 function Trust() {
+  const brands = [
+    { name: 'Google', color: '#4285F4' },
+    { name: 'Microsoft', color: '#00A4EF' },
+    { name: 'Slack', color: '#9A154B' },
+    { name: 'Spotify', color: '#1DB954' },
+    { name: 'Stripe', color: '#635BFF' },
+    { name: 'Notion', color: '#096021' },
+    { name: 'Figma', color: '#F24E1E' },
+    { name: 'Dropbox', color: '#0061FF' },
+  ];
+
   return (
-    <div className='pt-20 pb-20 border-t border-gray-400 px-5 dark:bg-slate-900'>
-        <div className='text-center font-bold'>
-            <span className='uppercase text-gray-400 text-lg'>trusted by Millions</span>
-            <h2 className='font-bold text-[30px]/12'>500,000+ Users Worldwide</h2>
-        </div>
-        <Swiper modules={[Autoplay, Pagination]} spaceBetween={25}  slidesPerView={4} loop={true} 
-              autoplay={{
-                delay: 3000, disableOnInteraction: false,
-              }}
-              breakpoints={{
-                320: { slidesPerView: 2 }, 768: { slidesPerView: 3 },
-                1024: { slidesPerView: 4 }, 1200: { slidesPerView: 4 },
-              }} 
-              className="mySwiper flex  items-center mt-10">
-              <SwiperSlide>
-                <div className='pb-5 flex  gap-0 text-gray-400 xl:text-4xl py-5 font-bold text-lg items-center justify-center mx-auto'>
-                    <FaGoogle />oogle
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className='pb-5 flex  gap-2 text-gray-400 xl:text-4xl py-5  font-bold text-lg items-center justify-center mx-auto'>
-                    <FaMicrosoft size={30} />Microsoft
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className='pb-5 flex  gap-2 text-gray-400 xl:text-4xl py-5  font-bold text-lg items-center justify-center mx-auto'>
-                    <FaSlack  size={30} />Slack
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className='pb-5 gap-2  text-gray-400 xl:text-4xl py-5  font-bold text-lg flex items-center justify-center mx-auto'>
-                    <FaSpotify size={30} />Spotify
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className='pb-5 flex -mt-3 xl:-mt-6  text-gray-400 xl:text-6xl py-5  gap-2 font-bold text-lg items-center justify-center mx-auto'>
-                    <FaStripe className='size-13 md:mt-0.5 xl:size-23' />
-                </div>
-              </SwiperSlide>
-        </Swiper>
+    <div className='pt-20 pb-20 border-t border-gray-200 dark:border-gray-800 px-5 dark:bg-slate-900'>
+      <div className='text-center'>
+        <span className='uppercase text-gray-400 text-sm xl:text-base tracking-widest font-bold'>
+          Trusted by Millions
+        </span>
+        <h2 className='font-bold text-3xl xl:text-4xl mt-3 dark:text-white text-slate-900'>
+          500,000+ Users Worldwide
+        </h2>
+      </div>
+
+      {/* BRAND GRID */}
+      <div className='mt-12 max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 xl:gap-6'>
+        {brands.map((brand, index) => (
+          <div
+            key={index}
+            className='flex items-center justify-center rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 py-6 xl:py-7 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-slate-300 dark:hover:border-slate-600'
+          >
+            <span
+              className='font-bold text-xl xl:text-2xl tracking-tight'
+              style={{ color: brand.color }}
+            >
+              {brand.name}
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
-  )
+  );
 }
 
-export default Trust
+export default Trust;

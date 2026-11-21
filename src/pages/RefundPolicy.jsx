@@ -11,12 +11,16 @@ function RefundPolicy() {
         <div className="prose prose-slate dark:prose-invert max-w-none space-y-6 text-slate-700 dark:text-slate-300">
           <section>
             <h2 className="text-2xl font-bold mb-3">1. Overview</h2>
-            <p>We want you to be satisfied with Convertly Pro. If you are not happy with your purchase, we offer a fair refund policy as described below.</p>
+            <p>We want you to be satisfied with <span className="font-extrabold tracking-tight text-slate-900 dark:text-white">
+                                file<span className="text-indigo-600">to</span>any
+                              </span> Pro. If you are not happy with your purchase, we offer a fair refund policy as described below.</p>
           </section>
 
           <section>
             <h2 className="text-2xl font-bold mb-3">2. 14-Day Money-Back Guarantee</h2>
-            <p>If you are not satisfied with Convertly Pro, you can request a full refund within <strong>14 days</strong> of your initial purchase. No questions asked.</p>
+            <p>If you are not satisfied with <span className="font-extrabold tracking-tight text-slate-900 dark:text-white">
+                                file<span className="text-indigo-600">to</span>any
+                              </span> Pro, you can request a full refund within <strong>14 days</strong> of your initial purchase. No questions asked.</p>
           </section>
 
           <section>

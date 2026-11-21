@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import CompressPdf from './pages/CompressPdf';
@@ -25,14 +25,43 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import RefundPolicy from './pages/RefundPolicy';
 import TermsOfService from './pages/TermsOfService';
 import ScrollToTop from './components/ScrollToTop';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
+import CookieBanner from './components/CookieBanner';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 function App() {
   const [isDark, setIsDark] = useState(false);
-
   const [user, setUser] = useState(null);
+
+  // ✅ NAYA: Pro user check karne ke liye
+  const [isPro, setIsPro] = useState(false);
 
   // Prevent UI flicker while checking session
   const [authLoading, setAuthLoading] = useState(true);
+
+  // ✅ NAYA: User ka plan database se fetch karne ka function
+  const checkUserPlan = async (currentUser) => {
+    if (!currentUser) {
+      setIsPro(false);
+      return;
+    }
+
+    const { data: profile, error } = await supabase
+      .from('profiles')
+      .select('plan')
+      .eq('id', currentUser.id)
+      .maybeSingle();
+
+    if (error) {
+      console.error("Plan fetch error:", error);
+      setIsPro(false);
+      return;
+    }
+
+    setIsPro(profile?.plan === 'pro');
+  };
 
   useEffect(() => {
     let mounted = true;
@@ -52,7 +81,12 @@ function App() {
 
       if (!mounted) return;
 
-      setUser(session?.user ?? null);
+      const currentUser = session?.user ?? null;
+      setUser(currentUser);
+
+      // ✅ NAYA: Plan bhi check karein
+      await checkUserPlan(currentUser);
+
       setAuthLoading(false);
     };
 
@@ -64,8 +98,11 @@ function App() {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        setUser(session?.user ?? null);
+      async (_event, session) => {
+        const currentUser = session?.user ?? null;
+        setUser(currentUser);
+        // ✅ NAYA: Login/logout par plan dobara check karein
+        await checkUserPlan(currentUser);
       }
     );
 
@@ -87,14 +124,22 @@ function App() {
     }
 
     setUser(null);
+    setIsPro(false); // ✅ Logout par Pro reset
   };
 
   return (
     <>
       <ScrollToTop />
-      <Navbar isDark={isDark} setIsDark={setIsDark} user={user} onLogout={handleLogout} authLoading={authLoading} />
+      <Navbar
+        isDark={isDark}
+        setIsDark={setIsDark}
+        user={user}
+        onLogout={handleLogout}
+        authLoading={authLoading}
+        isPro={isPro}
+      />
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Home isPro={isPro} user={user} />} />
         <Route path='/jpg-to-pdf' element={<JpgToPdf />} />
         <Route path='/pdf-to-jpg' element={<PdfToJpg />} />
         <Route path='/word-to-pdf' element={<WordToPdf />} />
@@ -112,12 +157,23 @@ function App() {
             <Dashboard />
           </ProtectedRoutes>
         } />
-        <Route path='/pricing' element={<PricingPage />} />
+
+        {/* ✅ NAYA: Pro user ko Pricing page se Dashboard par bhejein */}
+        {/* <Route
+          path='/pricing'
+          element={isPro ? <Navigate to="/dashboard" replace /> : <PricingPage />}
+        /> */}
+        {isPro ? <></> : <Route path='/pricing' element={<PricingPage user={user} />} />}
         <Route path='/privacy' element={<PrivacyPolicy />} />
         <Route path='/terms' element={<TermsOfService />} />
         <Route path='/refund' element={<RefundPolicy />} />
+        <Route path='/blog' element={<Blog />} />
+        <Route path='/blog/:slug' element={<BlogPost />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/reset-password' element={<ResetPassword />} />
       </Routes>
       <Footer />
+      <CookieBanner />
     </>
   )
 }

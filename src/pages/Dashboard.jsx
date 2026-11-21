@@ -12,7 +12,9 @@ function Dashboard() {
     const [usageLimit, setUsageLimit] = useState(5);
 
     const remaining = Math.max(usageLimit - usageCount, 0);
-    const isPro = subscription?.plan === 'pro' && subscription?.status === 'active';
+    
+    // ✅ FIX 1: isPro ab profile aur subscription dono check karega
+    const isPro = profile?.plan === 'pro' || (subscription?.plan === 'pro' && subscription?.status === 'active');
 
     useEffect(() => {
         const loadUser = async () => {
@@ -29,13 +31,13 @@ function Dashboard() {
 
             if (currentUser) {
                 // -----------------------------------------
-                // 1. PROFILE
+                // 1. PROFILE (✅ FIX 2: Ab 'plan' bhi fetch ho raha hai)
                 // -----------------------------------------
                 const { data: profileData, error: profileError } = await supabase
                     .from("profiles")
-                    .select("full_name, email")
+                    .select("full_name, email, plan") 
                     .eq("id", currentUser.id)
-                    .single();
+                    .maybeSingle(); // single ki jagah maybeSingle taake crash na ho
 
                 if (profileError) {
                     console.error("Profile error: ", profileError);
@@ -44,7 +46,7 @@ function Dashboard() {
                 }
 
                 // -----------------------------------------
-                // 2. SUBSCRIPTION (NEW)
+                // 2. SUBSCRIPTION
                 // -----------------------------------------
                 const { data: subData, error: subError } = await supabase
                     .from("subscriptions")
@@ -76,10 +78,10 @@ function Dashboard() {
                 }
 
                 // -----------------------------------------
-                // 4. USAGE LIMIT (from plan)
+                // 4. USAGE LIMIT (✅ FIX 3: Plan ke hisaab se limit)
                 // -----------------------------------------
-                if (subData?.plan === 'pro' && subData?.status === 'active') {
-                    setUsageLimit(100);
+                if (profileData?.plan === 'pro' || (subData?.plan === 'pro' && subData?.status === 'active')) {
+                    setUsageLimit(100); // Ya 500, jo aap chahein
                 } else {
                     setUsageLimit(5);
                 }
@@ -98,7 +100,9 @@ function Dashboard() {
                         {profile?.full_name || user?.user_metadata?.full_name || user?.email}
                     </h1>
                     <p className="mt-2 text-slate-500 dark:text-slate-400">
-                        Manage your Convertly account usage.
+                        Manage your <span className="font-extrabold tracking-tight text-slate-900 dark:text-white">
+                                file<span className="text-indigo-600">to</span>any
+                              </span> account usage.
                     </p>
                 </div>
 
@@ -106,11 +110,8 @@ function Dashboard() {
                     <p className="text-slate-500">Loading...</p>
                 ) : user ? (
                     <>
-                        {/* ======================================
-                            TOP CARDS
-                        ====================================== */}
+                        {/* TOP CARDS */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-
                             {/* CURRENT PLAN */}
                             <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6">
                                 <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
@@ -118,7 +119,7 @@ function Dashboard() {
                                 </p>
                                 <div className="mt-3 flex items-center justify-between">
                                     <h2 className='text-2xl font-bold capitalize text-slate-900 dark:text-white'>
-                                        {subscription?.plan || "free"}
+                                        {profile?.plan || subscription?.plan || "free"}
                                     </h2>
                                     <span className={`rounded-full px-3 py-1 text-sm font-semibold ${
                                         isPro
@@ -160,7 +161,7 @@ function Dashboard() {
                                     Subscription
                                 </p>
                                 <h2 className='mt-3 text-2xl font-bold capitalize text-slate-900 dark:text-white'>
-                                    {subscription?.status || "inactive"}
+                                    {isPro ? 'Active' : (subscription?.status || "Inactive")}
                                 </h2>
                                 <p className='mt-2 text-sm text-slate-500 dark:text-slate-400'>
                                     {isPro
@@ -170,11 +171,8 @@ function Dashboard() {
                             </div>
                         </div>
 
-                        {/* ======================================
-                            ACCOUNT + UPGRADE
-                        ====================================== */}
+                        {/* ACCOUNT + UPGRADE */}
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-5">
-
                             {/* ACCOUNT INFO */}
                             <div className="lg:col-span-2 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6">
                                 <h2 className='text-xl font-bold text-slate-900 dark:text-white'>
@@ -218,7 +216,7 @@ function Dashboard() {
                                         Upgrade to Pro
                                     </h2>
                                     <p className="mt-3 text-sm leading-6 text-indigo-100">
-                                        Get higher conversion limits and access to premium Convertly features.
+                                       Get higher conversion limits and access to premium features. Enjoy unlimited uploads and lightning-fast speeds.
                                     </p>
                                     <UpgradeButton className='mt-6 !bg-white !text-indigo-600 hover:!bg-indigo-50' />
                                 </div>

@@ -16,7 +16,7 @@ import Trust from '../components/Trust'
 import Whyus from '../components/Whyus'
 
 
-function Home() {
+function Home({ isPro, user }) {
   return (
     <div>
       <Hero />
@@ -29,10 +29,10 @@ function Home() {
       <Articles />
       <Poster />
       <Reviews />
-      <Pricing />
+      {isPro ? <></> : <Pricing  user={user} />}
       <FreeVsPro />
       <Faqs />
-      <JoinConvertly />
+      <JoinConvertly isPro={isPro} />
     </div>
   )
 }

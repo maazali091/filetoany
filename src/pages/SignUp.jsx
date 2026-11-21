@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { supabase } from "../lib/supabase";
+import { Link } from "react-router-dom";
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ function Signup() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [agreed, setAgreed] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -94,7 +96,9 @@ function Signup() {
             </h1>
 
             <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
-              Start using Convertly for free.
+              Start using <span className="font-extrabold tracking-tight text-slate-900 dark:text-white">
+                                file<span className="text-indigo-600">to</span>any
+                              </span> for free.
             </p>
           </div>
 
@@ -171,9 +175,31 @@ function Signup() {
               </div>
             )}
 
+            {/* Mandatory Consent Checkbox */}
+            <div className="flex items-start gap-2 mt-4">
+              <input
+                type="checkbox"
+                id="consent"
+                checked={agreed}
+                onChange={(e) => setAgreed(e.target.checked)}
+                className="mt-1 h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+              />
+              <label htmlFor="consent" className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                I agree to the{' '}
+                <Link to="/terms" className="text-indigo-600 dark:text-indigo-400 underline">
+                  Terms of Service
+                </Link>
+                {' '}and{' '}
+                <Link to="/privacy" className="text-indigo-600 dark:text-indigo-400 underline">
+                  Privacy Policy
+                </Link>
+                , and I consent to the use of cookies.
+              </label>
+            </div>
+
             <button
               type="submit"
-              disabled={loading}
+              disabled={!agreed || loading}
               className="w-full cursor-pointer rounded-xl bg-blue-600 px-4 py-3 font-semibold text-white transition hover:bg-blue-700 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60"
             >
               {loading ? "Creating account..." : "Create account"}

@@ -10,7 +10,9 @@ function FreeVsPro() {
                 </h2>
 
                 <span className='font-medium text-[20px] xl:text-[23px] text-slate-600 dark:text-gray-400'>
-                    See why teams choose Convertly
+                    See why teams choose <span className="font-extrabold tracking-tight text-slate-900 dark:text-white">
+                                file<span className="text-indigo-600">to</span>any
+                              </span>
                 </span>
             </div>
 

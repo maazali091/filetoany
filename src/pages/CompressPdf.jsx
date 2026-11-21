@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { PDFDocument } from "pdf-lib";
-import { AlertTriangle, Check, Download, FileDown, Lock, RotateCcw, Zap } from "lucide-react";
+import { AlertTriangle, Check, Download, FileDown, Lock, RotateCcw, Shield, Zap } from "lucide-react";
 import { supabase } from "../lib/supabase";
 import LimitReached from "../components/LimitReached";
 
@@ -282,6 +282,11 @@ function CompressPdf() {
                 Choose PDF
               </span>
               <input id="compress-pdf-upload" type="file" accept=".pdf,application/pdf" onChange={handleFileChange} className="hidden"/>
+
+              <div className="mt-7 -mb-3 flex items-center justify-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+                  <Shield size={14} className="text-emerald-500" />
+                  <span>Files are encrypted and auto-deleted after 1 hour.</span>
+              </div>
             </label>
           ) : (
             <>

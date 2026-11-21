@@ -2,7 +2,7 @@ import React from "react";
 import { Check, Crown } from "lucide-react";
 import UpgradeButton from "../components/UpgradeButton";
 
-function PricingPlan() {
+function PricingPlan({ user }) {
     return (
         <section className="min-h-screen bg-slate-50 px-5 py-16 text-slate-900 dark:bg-slate-950 dark:text-white">
             <div className="mx-auto max-w-6xl">
@@ -45,12 +45,12 @@ function PricingPlan() {
                         </div>
 
                         {/* Button */}
-                        <button
-                            type="button"
-                            className="mt-8 w-full rounded-xl bg-slate-100 px-5 py-3.5 text-base font-semibold text-slate-900 transition hover:bg-slate-200 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700"
-                        >
-                            Get Started
-                        </button>
+                         <Link
+                            to={user ? '/dashboard' : '/sign-up'}
+                            className="mt-8 block w-full rounded-xl bg-slate-100 px-5 py-3.5 text-center text-base font-semibold text-slate-900 transition hover:bg-slate-200 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700"
+                            >
+                            {user ? 'Go to Dashboard' : 'Get Started'}
+                        </Link>
 
                         {/* Features */}
                         <div className="mt-9 space-y-5">
@@ -111,7 +111,7 @@ function PricingPlan() {
                         >
                             <
                         </button> */}
-                        <UpgradeButton className="mt-8 w-full" />
+                        <UpgradeButton className="mt-8 w-full" /> 
                         {/* Features */}
                         <div className="mt-9 space-y-5">
 

@@ -11,12 +11,16 @@ function TermsOfService() {
         <div className="prose prose-slate dark:prose-invert max-w-none space-y-6 text-slate-700 dark:text-slate-300">
           <section>
             <h2 className="text-2xl font-bold mb-3">1. Acceptance of Terms</h2>
-            <p>By accessing or using Convertly, you agree to be bound by these Terms of Service. If you do not agree, please do not use our services.</p>
+            <p>By accessing or using <span className="font-extrabold tracking-tight text-slate-900 dark:text-white">
+                                file<span className="text-indigo-600">to</span>any
+                              </span>, you agree to be bound by these Terms of Service. If you do not agree, please do not use our services.</p>
           </section>
 
           <section>
             <h2 className="text-2xl font-bold mb-3">2. Description of Service</h2>
-            <p>Convertly provides online file conversion tools including PDF, Word, Excel, JPG, and other format conversions. All file processing happens locally in your browser.</p>
+            <p><span className="font-extrabold tracking-tight text-slate-900 dark:text-white">
+                                file<span className="text-indigo-600">to</span>any
+                              </span> provides online file conversion tools including PDF, Word, Excel, JPG, and other format conversions. All file processing happens locally in your browser.</p>
           </section>
 
           <section>
@@ -56,7 +60,9 @@ function TermsOfService() {
 
           <section>
             <h2 className="text-2xl font-bold mb-3">8. Limitation of Liability</h2>
-            <p>Convertly is provided "as is" without warranties of any kind. We are not liable for any damages arising from the use of our services.</p>
+            <p><span className="font-extrabold tracking-tight text-slate-900 dark:text-white">
+                                file<span className="text-indigo-600">to</span>any
+                              </span> is provided "as is" without warranties of any kind. We are not liable for any damages arising from the use of our services.</p>
           </section>
 
           <section>

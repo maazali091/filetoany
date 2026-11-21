@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { StarIcon, UploadIcon, ArrowRight, Shield, Eye, FileText, FileImage, FileSpreadsheet, File as FileIcon, X, Check, ChevronRight, Sparkles } from 'lucide-react';
+import { StarIcon, UploadIcon, ArrowRight, Shield, Eye, FileText, FileImage, FileSpreadsheet, File as FileIcon, X, Check, ChevronRight, Sparkles, Lock, Trash2 } from 'lucide-react';
 
 function Hero() {
     const navigate = useNavigate();
@@ -163,14 +163,14 @@ function Hero() {
     return (
         <div className='px-5 md:px-10 py-12 lg:grid lg:grid-cols-5 lg:gap-10 lg:justify-center lg:items-center xl:pt-15 xl:pb-30 xl:px-15 dark:bg-slate-900'>
             <div className='flex items-start flex-col gap-5 lg:col-span-3'>
-                <span className='flex p-2 xl:px-3 text-sm xl:text-md border text-indigo-700 dark:bg-gray-700 font-medium rounded-full items-center gap-2 justify-start'>
+                <span className='flex p-2 xl:px-3 text-sm xl:text-md border text-indigo-700 dark:bg-gray-800 font-medium rounded-full items-center gap-2 justify-start'>
                     <StarIcon size={18} /> AI-Powered Conversion
                 </span>
                 <h1 className='text-6xl/17 xl:text-7xl/20 md:max-w-100 xl:max-w-130 font-bold'>
                     Convert Files <span className='text-indigo-700'>in Seconds</span>
                 </h1>
                 <p className='text-lg/7 text-slate-400 md:max-w-130 tracking-wide'>
-                    Lightning-fast file conversion with military-grade security. No ads, no limits, no signup required.
+                    Lightning-fast file conversion with military-grade security. Create a free account and get 5 conversions per day — no credit card required.
                 </p>
                 <div className='flex flex-wrap gap-3'>
                     <span className='px-5 py-2 border border-slate-300 hover:shadow-md transition duration-200 cursor-pointer rounded-full'>PDF</span>
@@ -188,11 +188,21 @@ function Hero() {
                         Explore Tools
                     </a>
                 </div>
-
-                <div className='flex gap-5 text-sm font-medium dark:text-slate-300 text-slate-700 mt-2 md:mt-7'>
-                    <span className='flex gap-2 items-center'><Shield className='text-emerald-700' /> Military-grade encryption</span>
-                    <span className='flex gap-2 items-center'><Eye className='text-emerald-700' /> Zero data logging</span>
-                </div>
+                {/* ✅ Privacy Trust Badges */}
+                <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-slate-600 dark:text-slate-400">
+                    <div className="flex items-center gap-2">
+                        <Shield size={16} className="text-emerald-500" />
+                        <span>256-bit SSL Encrypted</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <Lock size={16} className="text-emerald-500" />
+                        <span>Files Never Shared</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <Trash2 size={16} className="text-emerald-500" />
+                        <span>Auto-Deleted in 1 Hour</span>
+                    </div>
+                    </div>
             </div>
 
             {/* Drag & Drop Zone */}
@@ -279,6 +289,11 @@ function Hero() {
                 )}
                 {/* Hidden file input */}
                 <input ref={fileInputRef} type="file" onChange={handleInputChange} className="hidden" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png"/>
+                {/* ✅ Security Badge */}
+<div className="mt-4 flex items-center justify-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+  <Shield size={14} className="text-emerald-500" />
+  <span>Your files are secure. Auto-deleted after 1 hour.</span>
+</div>
             </div>
             {/* Mobile upload button */}
             <div className="lg:hidden fixed bottom-5 right-5 z-40">
@@ -287,6 +302,7 @@ function Hero() {
                     <span className="text-sm font-medium">Upload File</span>
                 </button>
             </div>
+            
         </div>
     );
 }

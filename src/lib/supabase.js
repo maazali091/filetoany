@@ -6,5 +6,13 @@ const supabasePublishableKey =
 
 export const supabase = createClient(
   supabaseUrl,
-  supabasePublishableKey
+  supabasePublishableKey,
+  {
+    auth: {
+      detectSessionInUrl: true,   // ✅ Reset link se session detect karega
+      persistSession: true,        // ✅ Session localStorage mein save karega
+      autoRefreshToken: true,      // ✅ Token auto refresh hoga
+      flowType: 'pkce',            // ✅ Supabase ka recommended flow
+    },
+  }
 )

@@ -5,15 +5,23 @@ function Features() {
     return (
         <div className='pt-30 pb-10 xl:pb-25  px-5 md:px-10 xl:px-20 bg-gray-50 dark:bg-slate-900 lg:px-15' id='features'>
             <div className='text-center px-5'>
-                <h2 className='text-[45px]/15 md:text-[60px]/16 mb-3 xl:mb-4 font-bold'>How Convertly Compares</h2>
-                <span className='font-medium text-[20px] xl:text-[23px]  text-slate-600 dark:text-gray-400'>See why teams choose Convertly</span>
+                <h2 className='text-[45px]/15 md:text-[60px]/16 mb-3 xl:mb-4 font-bold'>How  
+                    <span className="font-extrabold tracking-tight mx-3 text-slate-900 dark:text-white">
+                                 file<span className="text-indigo-600">to</span>any
+                              </span>
+                 Compares</h2>
+                <span className='font-medium text-[20px] xl:text-[23px]  text-slate-600 dark:text-gray-400'>See why teams choose <span className="font-extrabold tracking-tight text-slate-900 dark:text-white">
+                                file<span className="text-indigo-600">to</span>any
+                              </span></span>
             </div>
             <div className='max-w-5xl mx-auto my-10 overflow-hidden border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm bg-white dark:bg-slate-900'>
                 <table className='w-full border-collapse text-left'>
                     <thead>
                         <tr className='border-b border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white'>
                             <th className='py-4 px-6 font-semibold'>Feature</th>
-                            <th className='py-4 px-6 font-semibold text-blue-600 dark:text-blue-400'>Convertly</th>
+                            <th className='py-4 px-6 font-semibold text-blue-600 dark:text-blue-400'><span className="font-bold tracking-tight text-slate-900 dark:text-white">
+                                file<span className="text-indigo-600">to</span>any
+                              </span></th>
                             <th className='py-4 px-6 font-semibold text-slate-500'>Others</th>
                         </tr>
                     </thead>

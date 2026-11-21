@@ -6,6 +6,7 @@ import {
   FileImage,
   Lock,
   RotateCcw,
+  Shield,
   Upload,
   Zap,
 } from "lucide-react";
@@ -598,7 +599,10 @@ function PdfToJpg() {
                 onChange={handleFileChange}
                 className="hidden"
               />
-
+              <div className="mt-7 -mb-3 flex items-center justify-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+                <Shield size={14} className="text-emerald-500" />
+                <span>Files are encrypted and auto-deleted after 1 hour.</span>
+              </div>
             </label>
 
           ) : (
