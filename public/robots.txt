@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.filetoany.tools/sitemap.xml
