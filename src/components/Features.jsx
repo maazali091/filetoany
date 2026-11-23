@@ -4,9 +4,9 @@ import React from 'react'
 function Features() {
     return (
         <div className='pt-30 pb-10 xl:pb-25  px-5 md:px-10 xl:px-20 bg-gray-50 dark:bg-slate-900 lg:px-15' id='features'>
-            <div className='text-center px-5'>
-                <h2 className='text-[45px]/15 md:text-[60px]/16 mb-3 xl:mb-4 font-bold'>How  
-                    <span className="font-extrabold tracking-tight mx-3 text-slate-900 dark:text-white">
+            <div className='text-center md:px-5'>
+                <h2 className='text-[35px]/10 md:text-[60px]/16 mb-3 xl:mb-4 font-bold'>How  
+                    <span className="font-extrabold tracking-tight mx-2 text-slate-900 inline-block md:inline dark:text-white">
                                  file<span className="text-indigo-600">to</span>any
                               </span>
                  Compares</h2>
